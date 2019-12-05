@@ -6,11 +6,14 @@ import (
 	"log"
 	"math/rand"
 	"net"
+	"random_passenger_driver/configs"
+	"random_passenger_driver/internal/coordinate_gen"
+	"random_passenger_driver/internal/drivers_processor"
 	"time"
 
-	"random_passenger/internal/order_gen_service"
+	"random_passenger_driver/internal/order_gen"
 
-	pb "random_passenger/internal/proto"
+	pb "random_passenger_driver/internal/proto"
 
 	"google.golang.org/grpc"
 )
@@ -64,20 +67,29 @@ func (s server) Max(srv pb.Math_MaxServer) error {
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	adrServ := order_gen_service.New(
-		"../random_passenger/internal/order_gen_service/usernames")
+	cfg := configs.Config{
+		CentralLatitude:  55.752818,
+		CentralLongitude: 37.621753,
+		Radius:           20000,
+		PathToNamesData:  "../random_passenger/internal/order_gen/usernames",
+	}
 
-	order := adrServ.GenOrder()
+	coordGen := coordinate_gen.New(
+		cfg.CentralLatitude,
+		cfg.CentralLongitude,
+	)
 
-	fmt.Println(order)
+	orderGen := order_gen.New(cfg.PathToNamesData, coordGen)
 
-	// create listiner
+	driverProcessor := drivers_processor.New(coordGen)
+
+	fmt.Println(orderGen, driverProcessor)
+
 	lis, err := net.Listen("tcp", ":50005")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// create grpc server
 	s := grpc.NewServer()
 	pb.RegisterMathServer(s, server{})
 

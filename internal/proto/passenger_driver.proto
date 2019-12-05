@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package protobuf;
+
+service Math {
+    rpc Driver (stream RequestDriver) returns (stream ResponseDriver) {}
+    rpc Order (stream RequestOrder) returns (stream ResponseOrder) {}
+}
+
+message RequestDriver {}
+
+message RequestOrder {}
+
+message ResponseDriver {
+    string id = 1;
+    string carModel = 2;
+    double latitude = 3;
+    double longitude = 4;
+}
+
+message ResponseOrder {
+    string id = 1;
+    string username = 2;
+    double latitude = 3;
+    double longitude = 4;
+}
