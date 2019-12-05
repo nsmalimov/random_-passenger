@@ -1,23 +1,53 @@
 package order_gen_service
 
 import (
+	"bufio"
+	"log"
 	"math"
 	"math/rand"
+	"os"
+
+	"github.com/google/uuid"
 )
 
 type OrderGenService struct {
-	pathToNamesData string
+	userNames []string
 }
 
 type Order struct {
+	id        string
 	username  string
 	latitude  float64
 	longitude float64
 }
 
 func New(pathToNamesData string) *OrderGenService {
+	file, err := os.Open(pathToNamesData)
+	if err != nil {
+		log.Fatalf("Error when try os.Open, err: %s", err)
+	}
+
+	defer func() {
+		err = file.Close()
+
+		if err != nil {
+			log.Fatalf("Error when try file.Close, err: %s", err)
+		}
+	}()
+
+	var userNames []string
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		userNames = append(userNames, scanner.Text())
+	}
+
+	if err = scanner.Err(); err != nil {
+		log.Fatalf("Error when try scanner.Err, err: %s", err)
+	}
+
 	return &OrderGenService{
-		pathToNamesData: pathToNamesData,
+		userNames: userNames,
 	}
 }
 
@@ -40,8 +70,8 @@ func (t *OrderGenService) Round(x float64, prec int) float64 {
 }
 
 func (t *OrderGenService) GenCoordinates(x0, y0, radius float64) (float64, float64) {
-	var radiusInDegrees float64
-	radiusInDegrees = float64(25000 / 111000.0)
+	radiusInDegrees := float64(25000 / 111000.0)
+
 	u := t.randFloat(0, 1)
 	v := t.randFloat(0, 1)
 
@@ -52,7 +82,6 @@ func (t *OrderGenService) GenCoordinates(x0, y0, radius float64) (float64, float
 
 	new_x := x / math.Cos(math.Pi*y0/180.0)
 
-	// 55.742245, 37.709603
 	foundLongitude := t.Round(new_x+x0, 6)
 	foundLatitude := t.Round(y+y0, 6)
 
@@ -60,9 +89,11 @@ func (t *OrderGenService) GenCoordinates(x0, y0, radius float64) (float64, float
 }
 
 func (t *OrderGenService) GenOrder() (order Order) {
-	order.latitude = 0
-	order.longitude = 0
-	order.username = ""
+	order.id = uuid.New().String()
+
+	order.latitude, order.longitude = t.GenCoordinates(55.752818, 37.621753, 20000)
+
+	order.username = t.userNames[rand.Intn(len(t.userNames))]
 
 	return
 }
