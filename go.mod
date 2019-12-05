@@ -1,4 +1,4 @@
-module random_passenger
+module random_passenger_driver
 
 go 1.13
 
