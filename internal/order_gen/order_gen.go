@@ -17,10 +17,10 @@ type OrderGenService struct {
 }
 
 type Order struct {
-	id        string
-	username  string
-	latitude  float64
-	longitude float64
+	ID        string
+	Username  string
+	Latitude  float64
+	Longitude float64
 }
 
 func New(pathToNamesData string, coordinateGen *coordinate_gen.CoordinateGen) *OrderGenService {
@@ -54,12 +54,12 @@ func New(pathToNamesData string, coordinateGen *coordinate_gen.CoordinateGen) *O
 	}
 }
 
-func (t *OrderGenService) GenOrder() (order Order) {
-	order.id = uuid.New().String()
+func (o *OrderGenService) GenOrder() (order Order) {
+	order.ID = uuid.New().String()
 
-	order.latitude, order.longitude = t.coordinateGen.GenCoordinates()
+	order.Latitude, order.Longitude = o.coordinateGen.GenCoordinates()
 
-	order.username = t.userNames[rand.Intn(len(t.userNames))]
+	order.Username = o.userNames[rand.Intn(len(o.userNames))]
 
 	return
 }

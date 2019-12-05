@@ -18,11 +18,11 @@ func New(centralLatitude, centralLongitude float64) *CoordinateGen {
 	}
 }
 
-func (t *CoordinateGen) randFloat(min, max float64) float64 {
+func (c *CoordinateGen) randFloat(min, max float64) float64 {
 	return min + rand.Float64()*(max-min)
 }
 
-func (t *CoordinateGen) round(x float64, prec int) float64 {
+func (c *CoordinateGen) round(x float64, prec int) float64 {
 	var rounder float64
 	pow := math.Pow(10, float64(prec))
 	intermed := x * pow
@@ -36,21 +36,21 @@ func (t *CoordinateGen) round(x float64, prec int) float64 {
 	return rounder / pow
 }
 
-func (t *CoordinateGen) GenCoordinates() (float64, float64) {
-	radiusInDegrees := float64(t.radius / 111000.0)
+func (c *CoordinateGen) GenCoordinates() (float64, float64) {
+	radiusInDegrees := float64(c.radius / 111000.0)
 
-	u := t.randFloat(0, 1)
-	v := t.randFloat(0, 1)
+	u := c.randFloat(0, 1)
+	v := c.randFloat(0, 1)
 
 	w := radiusInDegrees * math.Sqrt(u)
 	tN := 2 * math.Pi * v
 	x := w * math.Cos(tN)
 	y := w * math.Sin(tN)
 
-	new_x := x / math.Cos(math.Pi*t.centralLongitude/180.0)
+	new_x := x / math.Cos(math.Pi*c.centralLongitude/180.0)
 
-	foundLongitude := t.round(new_x+t.centralLongitude, 6)
-	foundLatitude := t.round(y+t.centralLatitude, 6)
+	foundLongitude := c.round(new_x+c.centralLongitude, 6)
+	foundLatitude := c.round(y+c.centralLatitude, 6)
 
 	return foundLatitude, foundLongitude
 }

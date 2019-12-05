@@ -1,21 +1,28 @@
-https://github.com/pahanini/go-grpc-bidirectional-streaming-example/blob/master/src/server/server.go
+### Quick start
+Требуется Go не ниже 1.13 с нативной поддержкой go.mod
 
-https://github.com/nodejs/node-inspect
+(Опционально)
+cd internal/proto && protoc --go_out=plugins=grpc:. *.proto && cd ../../
 
-https://github.com/rmrs/random-location
+Install protobuf
 
-https://docs.google.com/document/d/1RI11ZQyfok9su7P-M6JuusyTWgs5K4xO6MtfP40zg8s/edit
+Mac: brew install protobuf
+Linux: https://gist.github.com/sofyanhadia/37787e5ed098c97919b8c593f0ec44d8
 
-### Deps
-brew install protobuf
-go get -u google.golang.org/grpc
-go get -u github.com/golang/protobuf/protoc-gen-go
+### Сервер
 
-#### Quick start
-protoc --go_out=plugins=grpc:. *.proto
+cd cmd && go build -o main && ./main
 
-Продвинутый лвл
+### Клиент (тестовый)
 
-Завершать в месте с максимальной концетрацией потенциальных пассажиров
+cd test && go build -o client && ./client
 
-Каждый водитель условно новый, после направления его, про него забывает
+### Описание
+
+Этот проект часть тестового задания:
+
+https://docs.google.com/document/d/1RI11ZQyfok9su7P-M6JuusyTWgs5K4xO6MtfP40zg8s/edit?usp=sharing
+
+Доступен по урлу 80.93.182.105, порт: 50005
+
+Если есть вопросы, писать @nuralimov (Telegram)

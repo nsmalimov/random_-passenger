@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package protobuf;
 
-service Math {
+service PassengerDriver {
     rpc Driver (stream RequestDriver) returns (stream ResponseDriver) {}
     rpc Order (stream RequestOrder) returns (stream ResponseOrder) {}
 }

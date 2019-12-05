@@ -2,76 +2,102 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"log"
 	"math/rand"
 	"net"
+	"time"
+
 	"random_passenger_driver/configs"
 	"random_passenger_driver/internal/coordinate_gen"
 	"random_passenger_driver/internal/drivers_processor"
-	"time"
-
 	"random_passenger_driver/internal/order_gen"
-
 	pb "random_passenger_driver/internal/proto"
 
 	"google.golang.org/grpc"
 )
 
-type server struct{}
+type server struct {
+	driverProcessor *drivers_processor.DriversProcessor
+	orderGen        *order_gen.OrderGenService
+	config          *configs.Config
+}
 
-func (s server) Max(srv pb.Math_MaxServer) error {
+func (t *server) randInt(min, max int) int {
+	return min + rand.Int()*(max-min)
+}
 
-	log.Println("start new server")
-	var max int32
+func (s server) Driver(srv pb.PassengerDriver_DriverServer) error {
+	log.Println("Start Driver server")
+
 	ctx := srv.Context()
 
 	for {
-
-		// exit if context is done
-		// or continue
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		default:
 		}
 
-		// receive data from stream
-		req, err := srv.Recv()
-		if err == io.EOF {
-			// return will close stream from server side
-			log.Println("exit")
-			return nil
-		}
-		if err != nil {
-			log.Printf("receive error %v", err)
-			continue
-		}
+		driver := s.driverProcessor.Driver()
 
-		// continue if number reveived from stream
-		// less than max
-		if req.Num <= max {
-			continue
+		resp := pb.ResponseDriver{
+			Id:        driver.ID,
+			CarModel:  driver.CarModel,
+			Latitude:  driver.Latitude,
+			Longitude: driver.Longitude,
 		}
-
-		// update max and send it to stream
-		max = req.Num
-		resp := pb.Response{Result: max}
 		if err := srv.Send(&resp); err != nil {
-			log.Printf("send error %v", err)
+			log.Printf("Error when try srv.Send, err: %s", err)
 		}
-		log.Printf("send new max=%d", max)
+
+		rSleepSec := s.randInt(s.config.MinSecSleepDriver, s.config.MaxSecSleepDriver)
+		time.Sleep(time.Duration(rSleepSec) * time.Second)
+	}
+}
+
+func (s server) Order(srv pb.PassengerDriver_OrderServer) error {
+	log.Println("Start Order server")
+
+	ctx := srv.Context()
+
+	for {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+		}
+
+		order := s.orderGen.GenOrder()
+
+		resp := pb.ResponseOrder{
+			Id:        order.ID,
+			Username:  order.Username,
+			Latitude:  order.Latitude,
+			Longitude: order.Longitude,
+		}
+		if err := srv.Send(&resp); err != nil {
+			log.Printf("Error when try srv.Send, err: %s", err)
+		}
+
+		rSleepSec := s.randInt(s.config.MinSecSleepDriver, s.config.MaxSecSleepDriver)
+		time.Sleep(time.Duration(rSleepSec) * time.Second)
 	}
 }
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	cfg := configs.Config{
-		CentralLatitude:  55.752818,
-		CentralLongitude: 37.621753,
-		Radius:           20000,
-		PathToNamesData:  "../random_passenger/internal/order_gen/usernames",
+	cfg := &configs.Config{
+		CentralLatitude:   55.752818,
+		CentralLongitude:  37.621753,
+		Radius:            20000,
+		PathToNamesData:   "../random_passenger_driver/internal/order_gen/usernames",
+		Host:              "localhost",
+		Port:              50005,
+		MinSecSleepDriver: 3,
+		MaxSecSleepDriver: 15,
+		MinSecSleepOrder:  2,
+		MaxSecSleepOrder:  10,
 	}
 
 	coordGen := coordinate_gen.New(
@@ -80,21 +106,21 @@ func main() {
 	)
 
 	orderGen := order_gen.New(cfg.PathToNamesData, coordGen)
-
 	driverProcessor := drivers_processor.New(coordGen)
 
-	fmt.Println(orderGen, driverProcessor)
-
-	lis, err := net.Listen("tcp", ":50005")
+	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", cfg.Host, cfg.Port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("Error when try net.Listen, err: %s", err)
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterMathServer(s, server{})
+	pb.RegisterPassengerDriverServer(s, server{
+		orderGen:        orderGen,
+		driverProcessor: driverProcessor,
+		config:          cfg,
+	})
 
-	// and start...
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		log.Fatalf("Error when try s.Serve, err: %s", err)
 	}
 }

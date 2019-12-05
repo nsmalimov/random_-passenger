@@ -2,59 +2,51 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"log"
-	"math/rand"
-
-	pb "random_passenger/internal/proto"
-
 	"time"
+
+	pb "random_passenger_driver/internal/proto"
 
 	"google.golang.org/grpc"
 )
 
+type Config struct {
+	Host            string
+	Port            int
+	SecListenStream int
+}
+
 func main() {
-	rand.Seed(time.Now().Unix())
-
-	// dail server
-	conn, err := grpc.Dial(":50005", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("can not connect with server %v", err)
+	cfg := Config{
+		Host:            "localhost",
+		Port:            50005,
+		SecListenStream: 10,
 	}
 
-	// create stream
-	client := pb.NewMathClient(conn)
-	stream, err := client.Max(context.Background())
+	conn, err := grpc.Dial(fmt.Sprintf("%s:%d", cfg.Host, cfg.Port), grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("openn stream error %v", err)
+		log.Fatalf("Error when try grpc.Dial, err: %s", err)
 	}
 
-	var max int32
-	ctx := stream.Context()
+	client := pb.NewPassengerDriverClient(conn)
+
+	streamDriver, err := client.Driver(context.Background())
+	if err != nil {
+		log.Fatalf("Error when try client.Driver, err: %s", err)
+	}
+
+	streamOrder, err := client.Order(context.Background())
+	if err != nil {
+		log.Fatalf("Error when try client.Order, err: %s", err)
+	}
+
+	ctxDriver := streamDriver.Context()
+	ctxOrder := streamOrder.Context()
+
 	done := make(chan bool)
 
-	// first goroutine sends random increasing numbers to stream
-	// and closes int after 10 iterations
-	go func() {
-		for i := 1; i <= 10; i++ {
-			// generate random nummber and send it to stream
-			rnd := int32(rand.Intn(i))
-			req := pb.Request{Num: rnd}
-			if err := stream.Send(&req); err != nil {
-				log.Fatalf("can not send %v", err)
-			}
-			log.Printf("%d sent", req.Num)
-			time.Sleep(time.Millisecond * 200)
-		}
-		if err := stream.CloseSend(); err != nil {
-			log.Println(err)
-		}
-	}()
-
-	// second goroutine receives data from stream
-	// and saves result in max variable
-	//
-	// if stream is finished it closes done channel
 	go func() {
 		for {
 			resp, err := stream.Recv()
@@ -63,23 +55,29 @@ func main() {
 				return
 			}
 			if err != nil {
-				log.Fatalf("can not receive %v", err)
+				log.Fatalf("Error when try stream.Recv, err: %s", err)
 			}
 			max = resp.Result
 			log.Printf("new max %d received", max)
 		}
 	}()
 
-	// third goroutine closes done channel
-	// if context is done
+	timer := time.NewTimer(time.Duration(cfg.SecListenStream) * time.Second)
 	go func() {
-		<-ctx.Done()
-		if err := ctx.Err(); err != nil {
-			log.Println(err)
+		<-timer.C
+
+		<-ctxDriver.Done()
+		if err := ctxDriver.Err(); err != nil {
+			log.Printf("Error when try ctxDriver.Err, err: %s", err)
 		}
+
+		<-ctxOrder.Done()
+		if err := ctxOrder.Err(); err != nil {
+			log.Printf("Error when try ctxDriver.Err, err: %s", err)
+		}
+
 		close(done)
 	}()
 
 	<-done
-	log.Printf("finished with max=%d", max)
 }

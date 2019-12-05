@@ -222,23 +222,23 @@ func init() {
 func init() { proto.RegisterFile("passenger_driver.proto", fileDescriptor_7196ee08884a7dc7) }
 
 var fileDescriptor_7196ee08884a7dc7 = []byte{
-	// 244 bytes of a gzipped FileDescriptorProto
+	// 245 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x50, 0xc1, 0x4a, 0x03, 0x31,
-	0x10, 0x35, 0x6b, 0x2d, 0xed, 0xa0, 0x2b, 0xe4, 0xd0, 0x2e, 0x8b, 0x87, 0x92, 0xd3, 0x9e, 0x16,
-	0xd1, 0xbb, 0x20, 0x78, 0x2d, 0xc2, 0xfe, 0x80, 0xa4, 0x66, 0xac, 0x0b, 0x6b, 0xb2, 0x4e, 0x92,
-	0xfe, 0x83, 0x7f, 0x2d, 0x9d, 0x74, 0x6b, 0x65, 0x3d, 0x79, 0x0a, 0xef, 0xbd, 0xc9, 0xbc, 0x37,
-	0x0f, 0x16, 0xbd, 0xf6, 0x1e, 0xed, 0x16, 0xe9, 0xc5, 0x50, 0xbb, 0x43, 0xaa, 0x7b, 0x72, 0xc1,
-	0xc9, 0x19, 0x3f, 0x9b, 0xf8, 0xa6, 0xae, 0xe1, 0xaa, 0xc1, 0xcf, 0x88, 0x3e, 0x3c, 0xf1, 0x80,
-	0xca, 0xe1, 0xf2, 0x40, 0x3c, 0x93, 0x41, 0x52, 0x3b, 0xc8, 0x1b, 0xf4, 0xbd, 0xb3, 0x1e, 0xd3,
-	0x84, 0xcc, 0x21, 0x6b, 0x4d, 0x21, 0x56, 0xa2, 0x9a, 0x37, 0x59, 0x6b, 0x64, 0x09, 0xb3, 0x57,
-	0x4d, 0x6b, 0x67, 0xb0, 0x2b, 0x32, 0x66, 0x8f, 0x78, 0xaf, 0x75, 0x3a, 0xb4, 0x21, 0x1a, 0x2c,
-	0xce, 0x57, 0xa2, 0x12, 0xcd, 0x11, 0xcb, 0x1b, 0x98, 0x77, 0xce, 0x6e, 0x93, 0x38, 0x61, 0xf1,
-	0x87, 0x50, 0x71, 0x1f, 0x2c, 0xf9, 0x72, 0x90, 0xbf, 0x6c, 0xa3, 0x47, 0xb2, 0xfa, 0x03, 0x07,
-	0xdb, 0x01, 0xff, 0xdf, 0xf6, 0xee, 0x4b, 0xc0, 0x64, 0xad, 0xc3, 0xbb, 0x7c, 0x84, 0xe9, 0xe1,
-	0xde, 0x65, 0x3d, 0xb4, 0x55, 0xff, 0xaa, 0xaa, 0x2c, 0x4e, 0x85, 0xd3, 0x8a, 0xd4, 0x59, 0x25,
-	0x6e, 0x85, 0x7c, 0x80, 0x8b, 0x14, 0x7d, 0x31, 0xda, 0xc0, 0x7c, 0xb9, 0x1c, 0x2f, 0x48, 0xa5,
-	0xf3, 0xff, 0xcd, 0x94, 0xd5, 0xfb, 0xef, 0x00, 0x00, 0x00, 0xff, 0xff, 0x34, 0xad, 0x06, 0x9b,
-	0xc6, 0x01, 0x00, 0x00,
+	0x10, 0x35, 0xab, 0x96, 0x76, 0xd0, 0x2d, 0xe4, 0xd0, 0x2e, 0x8b, 0x87, 0x92, 0xd3, 0x9e, 0x16,
+	0xd1, 0xbb, 0x20, 0x78, 0x15, 0x65, 0x7f, 0x40, 0xb6, 0x66, 0x2c, 0x0b, 0x6b, 0xb2, 0x4e, 0x92,
+	0x7e, 0x89, 0x1f, 0x2c, 0x9d, 0x6c, 0x6a, 0xa5, 0x9e, 0x7a, 0x4a, 0xde, 0x7b, 0x33, 0xf3, 0x66,
+	0x1e, 0x2c, 0x86, 0xd6, 0x39, 0x34, 0x1b, 0xa4, 0x37, 0x4d, 0xdd, 0x16, 0xa9, 0x1e, 0xc8, 0x7a,
+	0x2b, 0xa7, 0xfc, 0xac, 0xc3, 0x87, 0x9a, 0xc3, 0x75, 0x83, 0x5f, 0x01, 0x9d, 0x7f, 0xe2, 0x02,
+	0x95, 0xc3, 0xd5, 0x48, 0xbc, 0x90, 0x46, 0x52, 0x5b, 0xc8, 0x1b, 0x74, 0x83, 0x35, 0x0e, 0x63,
+	0x85, 0xcc, 0x21, 0xeb, 0x74, 0x21, 0x56, 0xa2, 0x9a, 0x35, 0x59, 0xa7, 0x65, 0x09, 0xd3, 0xf7,
+	0x96, 0x9e, 0xad, 0xc6, 0xbe, 0xc8, 0x98, 0xdd, 0xe3, 0x9d, 0xd6, 0xb7, 0xbe, 0xf3, 0x41, 0x63,
+	0x71, 0xbe, 0x12, 0x95, 0x68, 0xf6, 0x58, 0xde, 0xc0, 0xac, 0xb7, 0x66, 0x13, 0xc5, 0x0b, 0x16,
+	0x7f, 0x09, 0x15, 0x76, 0x8b, 0x45, 0x5f, 0x5e, 0xe4, 0x3f, 0xdb, 0xe0, 0x90, 0x4c, 0xfb, 0x89,
+	0xc9, 0x36, 0xe1, 0xd3, 0x6d, 0xef, 0xbe, 0x05, 0xcc, 0x5f, 0x53, 0x68, 0xe3, 0xc1, 0x8f, 0x30,
+	0x19, 0x7f, 0xcb, 0x3a, 0x05, 0x57, 0xff, 0x49, 0xad, 0x2c, 0x0e, 0x85, 0xc3, 0xb4, 0xd4, 0x59,
+	0x25, 0x6e, 0x85, 0x7c, 0x80, 0xcb, 0x78, 0xc5, 0xe2, 0x68, 0x02, 0xf3, 0xe5, 0xf2, 0x78, 0x40,
+	0xcc, 0x9f, 0xfb, 0xd7, 0x13, 0x56, 0xef, 0x7f, 0x02, 0x00, 0x00, 0xff, 0xff, 0xa3, 0x57, 0x48,
+	0x0f, 0xd1, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -249,46 +249,46 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// MathClient is the client API for Math service.
+// PassengerDriverClient is the client API for PassengerDriver service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type MathClient interface {
-	Driver(ctx context.Context, opts ...grpc.CallOption) (Math_DriverClient, error)
-	Order(ctx context.Context, opts ...grpc.CallOption) (Math_OrderClient, error)
+type PassengerDriverClient interface {
+	Driver(ctx context.Context, opts ...grpc.CallOption) (PassengerDriver_DriverClient, error)
+	Order(ctx context.Context, opts ...grpc.CallOption) (PassengerDriver_OrderClient, error)
 }
 
-type mathClient struct {
+type passengerDriverClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewMathClient(cc *grpc.ClientConn) MathClient {
-	return &mathClient{cc}
+func NewPassengerDriverClient(cc *grpc.ClientConn) PassengerDriverClient {
+	return &passengerDriverClient{cc}
 }
 
-func (c *mathClient) Driver(ctx context.Context, opts ...grpc.CallOption) (Math_DriverClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_Math_serviceDesc.Streams[0], "/protobuf.Math/Driver", opts...)
+func (c *passengerDriverClient) Driver(ctx context.Context, opts ...grpc.CallOption) (PassengerDriver_DriverClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PassengerDriver_serviceDesc.Streams[0], "/protobuf.PassengerDriver/Driver", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &mathDriverClient{stream}
+	x := &passengerDriverDriverClient{stream}
 	return x, nil
 }
 
-type Math_DriverClient interface {
+type PassengerDriver_DriverClient interface {
 	Send(*RequestDriver) error
 	Recv() (*ResponseDriver, error)
 	grpc.ClientStream
 }
 
-type mathDriverClient struct {
+type passengerDriverDriverClient struct {
 	grpc.ClientStream
 }
 
-func (x *mathDriverClient) Send(m *RequestDriver) error {
+func (x *passengerDriverDriverClient) Send(m *RequestDriver) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *mathDriverClient) Recv() (*ResponseDriver, error) {
+func (x *passengerDriverDriverClient) Recv() (*ResponseDriver, error) {
 	m := new(ResponseDriver)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -296,30 +296,30 @@ func (x *mathDriverClient) Recv() (*ResponseDriver, error) {
 	return m, nil
 }
 
-func (c *mathClient) Order(ctx context.Context, opts ...grpc.CallOption) (Math_OrderClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_Math_serviceDesc.Streams[1], "/protobuf.Math/Order", opts...)
+func (c *passengerDriverClient) Order(ctx context.Context, opts ...grpc.CallOption) (PassengerDriver_OrderClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PassengerDriver_serviceDesc.Streams[1], "/protobuf.PassengerDriver/Order", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &mathOrderClient{stream}
+	x := &passengerDriverOrderClient{stream}
 	return x, nil
 }
 
-type Math_OrderClient interface {
+type PassengerDriver_OrderClient interface {
 	Send(*RequestOrder) error
 	Recv() (*ResponseOrder, error)
 	grpc.ClientStream
 }
 
-type mathOrderClient struct {
+type passengerDriverOrderClient struct {
 	grpc.ClientStream
 }
 
-func (x *mathOrderClient) Send(m *RequestOrder) error {
+func (x *passengerDriverOrderClient) Send(m *RequestOrder) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *mathOrderClient) Recv() (*ResponseOrder, error) {
+func (x *passengerDriverOrderClient) Recv() (*ResponseOrder, error) {
 	m := new(ResponseOrder)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -327,46 +327,46 @@ func (x *mathOrderClient) Recv() (*ResponseOrder, error) {
 	return m, nil
 }
 
-// MathServer is the server API for Math service.
-type MathServer interface {
-	Driver(Math_DriverServer) error
-	Order(Math_OrderServer) error
+// PassengerDriverServer is the server API for PassengerDriver service.
+type PassengerDriverServer interface {
+	Driver(PassengerDriver_DriverServer) error
+	Order(PassengerDriver_OrderServer) error
 }
 
-// UnimplementedMathServer can be embedded to have forward compatible implementations.
-type UnimplementedMathServer struct {
+// UnimplementedPassengerDriverServer can be embedded to have forward compatible implementations.
+type UnimplementedPassengerDriverServer struct {
 }
 
-func (*UnimplementedMathServer) Driver(srv Math_DriverServer) error {
+func (*UnimplementedPassengerDriverServer) Driver(srv PassengerDriver_DriverServer) error {
 	return status.Errorf(codes.Unimplemented, "method Driver not implemented")
 }
-func (*UnimplementedMathServer) Order(srv Math_OrderServer) error {
+func (*UnimplementedPassengerDriverServer) Order(srv PassengerDriver_OrderServer) error {
 	return status.Errorf(codes.Unimplemented, "method Order not implemented")
 }
 
-func RegisterMathServer(s *grpc.Server, srv MathServer) {
-	s.RegisterService(&_Math_serviceDesc, srv)
+func RegisterPassengerDriverServer(s *grpc.Server, srv PassengerDriverServer) {
+	s.RegisterService(&_PassengerDriver_serviceDesc, srv)
 }
 
-func _Math_Driver_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(MathServer).Driver(&mathDriverServer{stream})
+func _PassengerDriver_Driver_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PassengerDriverServer).Driver(&passengerDriverDriverServer{stream})
 }
 
-type Math_DriverServer interface {
+type PassengerDriver_DriverServer interface {
 	Send(*ResponseDriver) error
 	Recv() (*RequestDriver, error)
 	grpc.ServerStream
 }
 
-type mathDriverServer struct {
+type passengerDriverDriverServer struct {
 	grpc.ServerStream
 }
 
-func (x *mathDriverServer) Send(m *ResponseDriver) error {
+func (x *passengerDriverDriverServer) Send(m *ResponseDriver) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *mathDriverServer) Recv() (*RequestDriver, error) {
+func (x *passengerDriverDriverServer) Recv() (*RequestDriver, error) {
 	m := new(RequestDriver)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -374,25 +374,25 @@ func (x *mathDriverServer) Recv() (*RequestDriver, error) {
 	return m, nil
 }
 
-func _Math_Order_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(MathServer).Order(&mathOrderServer{stream})
+func _PassengerDriver_Order_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PassengerDriverServer).Order(&passengerDriverOrderServer{stream})
 }
 
-type Math_OrderServer interface {
+type PassengerDriver_OrderServer interface {
 	Send(*ResponseOrder) error
 	Recv() (*RequestOrder, error)
 	grpc.ServerStream
 }
 
-type mathOrderServer struct {
+type passengerDriverOrderServer struct {
 	grpc.ServerStream
 }
 
-func (x *mathOrderServer) Send(m *ResponseOrder) error {
+func (x *passengerDriverOrderServer) Send(m *ResponseOrder) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *mathOrderServer) Recv() (*RequestOrder, error) {
+func (x *passengerDriverOrderServer) Recv() (*RequestOrder, error) {
 	m := new(RequestOrder)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -400,20 +400,20 @@ func (x *mathOrderServer) Recv() (*RequestOrder, error) {
 	return m, nil
 }
 
-var _Math_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "protobuf.Math",
-	HandlerType: (*MathServer)(nil),
+var _PassengerDriver_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "protobuf.PassengerDriver",
+	HandlerType: (*PassengerDriverServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Driver",
-			Handler:       _Math_Driver_Handler,
+			Handler:       _PassengerDriver_Driver_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
 		{
 			StreamName:    "Order",
-			Handler:       _Math_Order_Handler,
+			Handler:       _PassengerDriver_Order_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

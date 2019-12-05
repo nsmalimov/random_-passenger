@@ -9,10 +9,10 @@ import (
 )
 
 type Driver struct {
-	id        string
-	carModel  string
-	latitude  float64
-	longitude float64
+	ID        string
+	CarModel  string
+	Latitude  float64
+	Longitude float64
 }
 
 type DriversProcessor struct {
@@ -43,11 +43,11 @@ func New(coordinateGen *coordinate_gen.CoordinateGen) *DriversProcessor {
 	}
 }
 
-func (t *DriversProcessor) Driver() (driver Driver) {
-	driver.id = uuid.New().String()
-	driver.carModel = t.automobiles[rand.Intn(len(t.automobiles))]
+func (d *DriversProcessor) Driver() (driver Driver) {
+	driver.ID = uuid.New().String()
+	driver.CarModel = d.automobiles[rand.Intn(len(d.automobiles))]
 
-	driver.latitude, driver.longitude = t.coordinateGen.GenCoordinates()
+	driver.Latitude, driver.Longitude = d.coordinateGen.GenCoordinates()
 
 	return
 }
