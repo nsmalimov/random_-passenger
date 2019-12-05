@@ -10,6 +10,8 @@ import (
 
 	"random_passenger/internal/order_gen_service"
 
+	pb "random_passenger/internal/proto"
+
 	"google.golang.org/grpc"
 )
 

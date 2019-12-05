@@ -6,7 +6,7 @@ import (
 	"log"
 	"math/rand"
 
-	pb "github.com/pahanini/go-grpc-bidirectional-streaming-example/src/proto"
+	pb "random_passenger/internal/proto"
 
 	"time"
 
