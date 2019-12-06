@@ -21,6 +21,8 @@ message ResponseDriver {
 message ResponseOrder {
     string id = 1;
     string username = 2;
-    double latitude = 3;
-    double longitude = 4;
+    double latitudeTo = 3;
+    double longitudeTo = 4;
+    double latitudeFrom = 5;
+    double longitudeFrom = 6;
 }

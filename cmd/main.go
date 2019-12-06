@@ -71,10 +71,12 @@ func (s server) Order(srv pb.PassengerDriver_OrderServer) error {
 		order := s.orderGen.GenOrder()
 
 		resp := pb.ResponseOrder{
-			Id:        order.ID,
-			Username:  order.Username,
-			Latitude:  order.Latitude,
-			Longitude: order.Longitude,
+			Id:            order.ID,
+			Username:      order.Username,
+			LatitudeTo:    order.LatitudeTo,
+			LongitudeTo:   order.LongitudeTo,
+			LatitudeFrom:  order.LatitudeFrom,
+			LongitudeFrom: order.LongitudeFrom,
 		}
 		if err := srv.Send(&resp); err != nil {
 			log.Printf("Error when try srv.Send, err: %s", err)

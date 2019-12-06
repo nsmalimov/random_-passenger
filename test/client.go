@@ -20,7 +20,8 @@ type Config struct {
 
 func main() {
 	cfg := Config{
-		Host:            "localhost",
+		// Host:            "localhost",
+		Host:            "80.93.182.105",
 		Port:            50005,
 		SecListenStream: 10,
 	}

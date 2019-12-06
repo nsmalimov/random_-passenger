@@ -1,7 +1,8 @@
 ### Quick start
 Требуется Go не ниже 1.13 с нативной поддержкой go.mod
 
-(Опционально)
+Опционально
+
 cd internal/proto && protoc --go_out=plugins=grpc:. *.proto && cd ../../
 
 Install protobuf
