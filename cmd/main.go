@@ -24,7 +24,7 @@ type server struct {
 }
 
 func (t *server) randInt(min, max int) int {
-	return min + rand.Int()*(max-min)
+	return rand.Intn(max-min) + min
 }
 
 func (s server) Driver(srv pb.PassengerDriver_DriverServer) error {
@@ -80,7 +80,7 @@ func (s server) Order(srv pb.PassengerDriver_OrderServer) error {
 			log.Printf("Error when try srv.Send, err: %s", err)
 		}
 
-		rSleepSec := s.randInt(s.config.MinSecSleepDriver, s.config.MaxSecSleepDriver)
+		rSleepSec := s.randInt(s.config.MinSecSleepOrder, s.config.MaxSecSleepOrder)
 		time.Sleep(time.Duration(rSleepSec) * time.Second)
 	}
 }
