@@ -49,16 +49,33 @@ func main() {
 
 	go func() {
 		for {
-			resp, err := stream.Recv()
+			resp, err := streamDriver.Recv()
 			if err == io.EOF {
 				close(done)
 				return
 			}
+
 			if err != nil {
 				log.Fatalf("Error when try stream.Recv, err: %s", err)
 			}
-			max = resp.Result
-			log.Printf("new max %d received", max)
+
+			log.Printf("Recieve from server (driver): %v", resp)
+		}
+	}()
+
+	go func() {
+		for {
+			resp, err := streamOrder.Recv()
+			if err == io.EOF {
+				close(done)
+				return
+			}
+
+			if err != nil {
+				log.Fatalf("Error when try stream.Recv, err: %s", err)
+			}
+
+			log.Printf("Recieve from server (order): %v", resp)
 		}
 	}()
 

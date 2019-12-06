@@ -1,0 +1,10 @@
+central_latitude:   55.752818
+central_longitude:  37.621753
+radius:            20000
+path_to_names_data:   "../internal/order_gen/usernames"
+host:              "localhost"
+port:              50005
+min_sec_sleep_driver: 3
+max_sec_sleep_driver: 15
+min_sec_sleep_order:  2
+max_sec_sleep_order:  10

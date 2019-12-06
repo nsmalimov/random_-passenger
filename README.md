@@ -9,13 +9,17 @@ Install protobuf
 Mac: brew install protobuf
 Linux: https://gist.github.com/sofyanhadia/37787e5ed098c97919b8c593f0ec44d8
 
+Проапдейтить конфигурационный файл (пути, время ожидания) если требуется.
+
 ### Сервер
 
-cd cmd && go build -o main && ./main
+cd cmd && go build -o main && ./main --config-file=../config.yaml
+
+Не забудь передать конфигурационный файл в аргументах
 
 ### Клиент (тестовый)
 
-cd test && go build -o client && ./client
+cd test && go build -o client && ./client --config-file=../config.yaml
 
 ### Описание
 

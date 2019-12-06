@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"math/rand"
@@ -87,17 +88,21 @@ func (s server) Order(srv pb.PassengerDriver_OrderServer) error {
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	cfg := &configs.Config{
-		CentralLatitude:   55.752818,
-		CentralLongitude:  37.621753,
-		Radius:            20000,
-		PathToNamesData:   "../random_passenger_driver/internal/order_gen/usernames",
-		Host:              "localhost",
-		Port:              50005,
-		MinSecSleepDriver: 3,
-		MaxSecSleepDriver: 15,
-		MinSecSleepOrder:  2,
-		MaxSecSleepOrder:  10,
+	configFilepathF := flag.String("config-file", "", "path to .yaml config file")
+
+	flag.Parse()
+
+	configFilepath := *configFilepathF
+
+	if configFilepath == "" {
+		log.Printf("No configFilepath set it by flag, -h for info")
+		return
+	}
+
+	cfg, err := configs.New(configFilepath)
+
+	if err != nil {
+		log.Fatalf("Error when try configs.New, err: %s", err)
 	}
 
 	coordGen := coordinate_gen.New(
