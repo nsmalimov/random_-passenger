@@ -110,6 +110,7 @@ func main() {
 	coordGen := coordinategen.New(
 		cfg.CentralLatitude,
 		cfg.CentralLongitude,
+		cfg.Radius,
 	)
 
 	orderGenS := ordergen.New(cfg.PathToNamesData, coordGen)

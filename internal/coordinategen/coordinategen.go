@@ -8,13 +8,14 @@ import (
 type CoordinateGen struct {
 	centralLatitude  float64
 	centralLongitude float64
-	radius           int
+	radius           float64
 }
 
-func New(centralLatitude, centralLongitude float64) *CoordinateGen {
+func New(centralLatitude, centralLongitude, radius float64) *CoordinateGen {
 	return &CoordinateGen{
 		centralLatitude:  centralLatitude,
 		centralLongitude: centralLongitude,
+		radius:           radius,
 	}
 }
 
@@ -40,7 +41,7 @@ func (c *CoordinateGen) round(x float64, prec int) float64 {
 }
 
 func (c *CoordinateGen) GenCoordinates() (float64, float64) {
-	radiusInDegrees := float64(c.radius / 111000.0)
+	radiusInDegrees := c.radius / 111000.0
 
 	u := c.randFloat(0, 1)
 	v := c.randFloat(0, 1)

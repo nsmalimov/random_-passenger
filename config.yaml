@@ -4,7 +4,7 @@ radius:            20000
 path_to_names_data:   "../internal/ordergen/usernames"
 host:              "localhost"
 port:              50005
-min_sec_sleep_driver: 8
-max_sec_sleep_driver: 15
-min_sec_sleep_order:  2
-max_sec_sleep_order:  6
+min_sec_sleep_driver: 1
+max_sec_sleep_driver: 5
+min_sec_sleep_order:  1
+max_sec_sleep_order:  3

@@ -11,7 +11,7 @@ type Config struct {
 	CentralLongitude  float64 `yaml:"central_longitude"`
 	PathToNamesData   string  `yaml:"path_to_names_data"`
 	Host              string  `yaml:"host"`
-	Radius            int     `yaml:"radius"`
+	Radius            float64 `yaml:"radius"`
 	Port              int     `yaml:"port"`
 	MinSecSleepDriver int     `yaml:"min_sec_sleep_driver"`
 	MaxSecSleepDriver int     `yaml:"max_sec_sleep_driver"`
