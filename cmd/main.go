@@ -9,21 +9,21 @@ import (
 	"time"
 
 	"random_passenger_driver/configs"
-	"random_passenger_driver/internal/coordinate_gen"
-	"random_passenger_driver/internal/drivers_processor"
-	"random_passenger_driver/internal/order_gen"
+	"random_passenger_driver/internal/coordinategen"
+	"random_passenger_driver/internal/driversprocessor"
+	"random_passenger_driver/internal/ordergen"
 	pb "random_passenger_driver/internal/proto"
 
 	"google.golang.org/grpc"
 )
 
 type server struct {
-	driverProcessor *drivers_processor.DriversProcessor
-	orderGen        *order_gen.OrderGenService
+	driverProcessor *driversprocessor.DriversProcessor
+	orderGen        *ordergen.OrderGenService
 	config          *configs.Config
 }
 
-func (t *server) randInt(min, max int) int {
+func (s *server) randInt(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
@@ -107,13 +107,13 @@ func main() {
 		log.Fatalf("Error when try configs.New, err: %s", err)
 	}
 
-	coordGen := coordinate_gen.New(
+	coordGen := coordinategen.New(
 		cfg.CentralLatitude,
 		cfg.CentralLongitude,
 	)
 
-	orderGen := order_gen.New(cfg.PathToNamesData, coordGen)
-	driverProcessor := drivers_processor.New(coordGen)
+	orderGenS := ordergen.New(cfg.PathToNamesData, coordGen)
+	driverProcessor := driversprocessor.New(coordGen)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", cfg.Host, cfg.Port))
 	if err != nil {
@@ -122,7 +122,7 @@ func main() {
 
 	s := grpc.NewServer()
 	pb.RegisterPassengerDriverServer(s, server{
-		orderGen:        orderGen,
+		orderGen:        orderGenS,
 		driverProcessor: driverProcessor,
 		config:          cfg,
 	})

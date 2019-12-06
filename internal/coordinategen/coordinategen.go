@@ -1,4 +1,4 @@
-package coordinate_gen
+package coordinategen
 
 import (
 	"math"
@@ -24,9 +24,12 @@ func (c *CoordinateGen) randFloat(min, max float64) float64 {
 
 func (c *CoordinateGen) round(x float64, prec int) float64 {
 	var rounder float64
+
 	pow := math.Pow(10, float64(prec))
+
 	intermed := x * pow
 	_, frac := math.Modf(intermed)
+
 	if frac >= 0.5 {
 		rounder = math.Ceil(intermed)
 	} else {
@@ -47,9 +50,9 @@ func (c *CoordinateGen) GenCoordinates() (float64, float64) {
 	x := w * math.Cos(tN)
 	y := w * math.Sin(tN)
 
-	new_x := x / math.Cos(math.Pi*c.centralLongitude/180.0)
+	newX := x / math.Cos(math.Pi*c.centralLongitude/180.0)
 
-	foundLongitude := c.round(new_x+c.centralLongitude, 6)
+	foundLongitude := c.round(newX+c.centralLongitude, 6)
 	foundLatitude := c.round(y+c.centralLatitude, 6)
 
 	return foundLatitude, foundLongitude

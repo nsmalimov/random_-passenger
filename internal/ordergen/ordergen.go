@@ -1,4 +1,4 @@
-package order_gen
+package ordergen
 
 import (
 	"bufio"
@@ -6,14 +6,14 @@ import (
 	"math/rand"
 	"os"
 
-	"random_passenger_driver/internal/coordinate_gen"
+	"random_passenger_driver/internal/coordinategen"
 
 	"github.com/google/uuid"
 )
 
 type OrderGenService struct {
 	userNames     []string
-	coordinateGen *coordinate_gen.CoordinateGen
+	coordinateGen *coordinategen.CoordinateGen
 }
 
 type Order struct {
@@ -25,7 +25,7 @@ type Order struct {
 	LongitudeTo   float64
 }
 
-func New(pathToNamesData string, coordinateGen *coordinate_gen.CoordinateGen) *OrderGenService {
+func New(pathToNamesData string, coordinateGen *coordinategen.CoordinateGen) *OrderGenService {
 	file, err := os.Open(pathToNamesData)
 	if err != nil {
 		log.Fatalf("Error when try os.Open, err: %s", err)

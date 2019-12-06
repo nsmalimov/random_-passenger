@@ -60,7 +60,7 @@ func main() {
 				log.Fatalf("Error when try stream.Recv, err: %s", err)
 			}
 
-			log.Printf("Recieve from server (driver): %v", resp)
+			log.Printf("Receive from server (driver): %v", resp)
 		}
 	}()
 
@@ -76,20 +76,23 @@ func main() {
 				log.Fatalf("Error when try stream.Recv, err: %s", err)
 			}
 
-			log.Printf("Recieve from server (order): %v", resp)
+			log.Printf("Receive from server (order): %v", resp)
 		}
 	}()
 
 	timer := time.NewTimer(time.Duration(cfg.SecListenStream) * time.Second)
+
 	go func() {
 		<-timer.C
 
 		<-ctxDriver.Done()
+
 		if err := ctxDriver.Err(); err != nil {
 			log.Printf("Error when try ctxDriver.Err, err: %s", err)
 		}
 
 		<-ctxOrder.Done()
+
 		if err := ctxOrder.Err(); err != nil {
 			log.Printf("Error when try ctxDriver.Err, err: %s", err)
 		}

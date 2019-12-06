@@ -1,9 +1,9 @@
-package drivers_processor
+package driversprocessor
 
 import (
 	"math/rand"
 
-	"random_passenger_driver/internal/coordinate_gen"
+	"random_passenger_driver/internal/coordinategen"
 
 	"github.com/google/uuid"
 )
@@ -17,10 +17,10 @@ type Driver struct {
 
 type DriversProcessor struct {
 	automobiles   []string
-	coordinateGen *coordinate_gen.CoordinateGen
+	coordinateGen *coordinategen.CoordinateGen
 }
 
-func New(coordinateGen *coordinate_gen.CoordinateGen) *DriversProcessor {
+func New(coordinateGen *coordinategen.CoordinateGen) *DriversProcessor {
 	return &DriversProcessor{
 		automobiles: []string{
 			"Kia X-Line",
